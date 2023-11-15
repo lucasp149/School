@@ -2,9 +2,9 @@ package classes;
 
 public interface IStudentsManage {
 
-   default int calculateStudentsLeft(int _maxStudents, int _assignedStudents){
-       return _maxStudents - _assignedStudents;
+   default int calculateStudentsLeft(int maxStudents, int assignedStudents){
+       return maxStudents - assignedStudents;
    }
 
-   void addStudent (Student _student) throws FullClassroomException;
+   void addStudent (Student student) throws FullClassroomException;
 }

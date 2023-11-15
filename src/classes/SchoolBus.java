@@ -1,9 +1,14 @@
 package classes;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class SchoolBus implements IStudentsManage, IDepositWork, IQualityControl{
-    // The License Plate cannot change
+    // Logger
+    private static final Logger LOGGER = LogManager.getLogger(SchoolBus.class);
     private int licensePlate;
 
     // number of students max cant be changed
@@ -11,14 +16,13 @@ public class SchoolBus implements IStudentsManage, IDepositWork, IQualityControl
     public int occupants = 0;
     private Staff driver;
     private String color;
-
-    private Student[] students = new Student[maxStudents];
+    ArrayList<Student> students = new ArrayList<>();
 
     public boolean isFunctional;
 
     // constructor
-    public SchoolBus (Staff _driver) {
-        driver = _driver;
+    public SchoolBus (Staff driver) {
+        this.driver = driver;
         color = "white";
         isFunctional = true;
     }
@@ -29,35 +33,35 @@ public class SchoolBus implements IStudentsManage, IDepositWork, IQualityControl
     }
 
     // method
-    public void addStudent(Student _student) {
+    public void addStudent(Student student) {
         if(occupants < maxStudents){
-            students[occupants] = _student;
+            students.add(student);
             occupants++;
         }
         else{
-            System.out.println("This bus is full");
+            LOGGER.debug("This bus is full");
         }
     }
-    public void assignDriver (Staff _driverId) {
-        driver = _driverId;
+    public void assignDriver (Staff driverId) {
+        driver = driverId;
         isFunctional = true;
     }
 
-    public String tryPainting (String _color) {
+    public String tryPainting (String color) {
 
-        String response = _color;
+        String response = color;
 
         try{
-         paint(_color);
+         paint(color);
 
-        }catch (PaintColorsException e){
+        }catch (BadPaintColorsException e){
             response = e.getMessage();
         }
         return response;
     }
-    public void setLicensePlate(int _licencePlate) throws LicencePlateException {
-        if(String.valueOf(_licencePlate).length() < 8 && !String.valueOf(_licencePlate).isEmpty()){
-            this.licensePlate = _licencePlate;
+    public void setLicensePlate(int licencePlate) throws LicencePlateException {
+        if(String.valueOf(licencePlate).length() < 8 && !String.valueOf(licencePlate).isEmpty()){
+            this.licensePlate = licencePlate;
         }
         else {
             throw new LicencePlateException("The licence number does not fulfill the requirements");
@@ -71,12 +75,12 @@ public class SchoolBus implements IStudentsManage, IDepositWork, IQualityControl
     }
 
     @Override
-    public void paint(String _color) throws PaintColorsException {
-        if(_color.equals("yellow")){
-            this.color = _color;
+    public void paint(String color) throws BadPaintColorsException {
+        if(color.equals("yellow")){
+            this.color = color;
         }
         else{
-            throw new PaintColorsException("The color you choose is not correct");
+            throw new BadPaintColorsException("The color you choose is not correct");
         }
     }
 
@@ -86,27 +90,24 @@ public class SchoolBus implements IStudentsManage, IDepositWork, IQualityControl
     }
 
     // setter
-    public void setDriver (Staff _driverId) {
-        this.driver = _driverId;
+    public void setDriver (Staff driverId) {
+        this.driver = driverId;
     }
 
-    public void setStudents(Student[] students) {
-        this.students = students;
-    }
 
     // getter
     public Staff getDriverId () {
         return driver;
     }
 
-    public Student[] getStudents() {
+    public ArrayList<Student> getStudents() {
         return students;
     }
 
     // Utils
     @Override
     public String toString(){
-        return "Licence Plate: " + licensePlate + "\nDriver name: " + driver.fullName + "\nDriver Id: "+ driver.employeeId + "\nOccupants: "+ occupants + "\nColor: "+ color;
+        return "Licence Plate: " + licensePlate + "\nDriver name: " + driver.fullName + "\nDriver Id: "+ driver.employeeId + "\nOccupants: "+ occupants + "\nColor: "+ color + "\nStudents: " + students;
     }
     @Override
     public boolean equals(Object compare) {

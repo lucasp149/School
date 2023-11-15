@@ -1,9 +1,14 @@
 package classes;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Blackboard extends Furniture {
 
-    // constructor
+    // Logger
+    private static final Logger LOGGER = LogManager.getLogger(Blackboard.class);
 
+    // constructor
     // If blackboard color is not white or black it has to be painted
     public Blackboard () {
          super(0, "brown", true, false);
@@ -14,14 +19,14 @@ public class Blackboard extends Furniture {
         return super.color.equals("black") || super.color.equals("white");
     }
     @Override
-    public void changeAssignedToClassroom(int _newClassroom) {
+    public void changeAssignedToClassroom(int newClassroom) {
         if(this.isPrepared()){
-            assignedToClassroom = _newClassroom;
+            assignedToClassroom = newClassroom;
             needChange = false;
         }
        else {
             assignedToClassroom = 0;
-            System.out.println("You cant assign a not prepared blackboard");
+            LOGGER.info("You cant assign a not prepared blackboard");
         }
     }
 

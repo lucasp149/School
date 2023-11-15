@@ -1,12 +1,18 @@
 package classes;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.ArrayList;
 
 public class Classroom implements IStudentsManage{
+
+    // Logger
+    private static final Logger LOGGER = LogManager.getLogger(Classroom.class);
     public int classId;
     protected final int MAX_STUDENTS = 20;
     protected int assignedStudents;
-    public Student[] students;
+    ArrayList<Student> students = new ArrayList<>();
 
     public static int totalNumberOfClassrooms;
 
@@ -14,29 +20,27 @@ public class Classroom implements IStudentsManage{
 
     static {
         totalNumberOfClassrooms = 0;
-        System.out.println("The CLASSROOM class has been executed for the first time and its value has been set to 0");
+        LOGGER.info("The CLASSROOM class has been executed for the first time and its value has been set to 0");
     }
 
-    public Classroom (int _classNumber) {
-        this.classId = _classNumber;
+    public Classroom (int classNumber) {
+        this.classId = classNumber;
         this.assignedStudents = 0;
-        this.students = new Student[MAX_STUDENTS];
+        totalNumberOfClassrooms++;
     }
 
     // methods
 
     @Override
-    public void addStudent (Student _student) throws FullClassroomException {
+    public void addStudent (Student student) throws FullClassroomException {
         if(assignedStudents < MAX_STUDENTS) {
-            students[assignedStudents] = _student;
+            students.add(student);
             assignedStudents++;
         }
         else {
             throw new FullClassroomException("The class is full");
         }
     }
-
-
 
     public static void countNewClassroom() {
         totalNumberOfClassrooms++;
@@ -55,8 +59,8 @@ public class Classroom implements IStudentsManage{
 
     // setters
 
-    public void setAssignedStudents(int _assignedStudents) {
-        this.assignedStudents = _assignedStudents;
+    public void setAssignedStudents(int assignedStudents) {
+        this.assignedStudents = assignedStudents;
     }
 }
 

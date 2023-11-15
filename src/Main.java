@@ -9,72 +9,71 @@ public class Main {
 
     static {
         System.setProperty("log4j.configurationFile","log4j2.xml");
-
      }
     private static final Logger LOGGER = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) throws NameLimitsException {
 
-        LOGGER.info("Hello word");
+
 /* Checking Blackboard
 
         Blackboard board = new Blackboard(2, "white");
-        System.out.println("This is created blackboard: ");
-        System.out.println("The color is: " + board.color);
-        System.out.println("Is new? " + board.isNew);
-        System.out.println("Need change? " + board.needChange);
-        System.out.println("Is assigned to classroom: " + board.assignedToClassroom);
+        LOGGER.info("This is created blackboard: ");
+        LOGGER.info("The color is: " + board.color);
+        LOGGER.info("Is new? " + board.isNew);
+        LOGGER.info("Need change? " + board.needChange);
+        LOGGER.info("Is assigned to classroom: " + board.assignedToClassroom);
 
-        System.out.println("Now I'll implement some changes. First I declare that the board needs change");
+        LOGGER.info("Now I'll implement some changes. First I declare that the board needs change");
         board.declareBadCondition();
-        System.out.println("Need change? " + board.needChange);
-        System.out.println("Is assigned to classroom: " + board.assignedToClassroom);
+        LOGGER.info("Need change? " + board.needChange);
+        LOGGER.info("Is assigned to classroom: " + board.assignedToClassroom);
 
-        System.out.println("Then I paint it black");
+        LOGGER.info("Then I paint it black");
         board.paintBoard("black");
 
-        System.out.println("Then I assign it to class 3");
+        LOGGER.info("Then I assign it to class 3");
         board.changeAssignedToClassroom(3);
-        System.out.println("Need change? " + board.needChange);
-        System.out.println("The color is: " + board.color);
-        System.out.println("Is assigned to classroom: " + board.assignedToClassroom);
+        LOGGER.info("Need change? " + board.needChange);
+        LOGGER.info("The color is: " + board.color);
+        LOGGER.info("Is assigned to classroom: " + board.assignedToClassroom);
 
  */
 /* Test Student
         Student student = new Student("Lucas Perez", 2002);
-        System.out.println("The new student info: ");
-        System.out.println("His name: " + student.fullName);
-        System.out.println("Absences: " + student.absences);
-        System.out.println("Id: " + student.studentId);
-        System.out.println("Subjects in course: " + student.subjectsInProgress);
-        System.out.println("Subject list: " + student.getSubjectsInProgressList());
-        System.out.println("Is he an Honor student?  " + student.getIsHonor());
-        System.out.println("He can continue coming to school? " + student.checkAbsencesState());
+        LOGGER.info("The new student info: ");
+        LOGGER.info("His name: " + student.fullName);
+        LOGGER.info("Absences: " + student.absences);
+        LOGGER.info("Id: " + student.studentId);
+        LOGGER.info("Subjects in course: " + student.subjectsInProgress);
+        LOGGER.info("Subject list: " + student.getSubjectsInProgressList());
+        LOGGER.info("Is he an Honor student?  " + student.getIsHonor());
+        LOGGER.info("He can continue coming to school? " + student.checkAbsencesState());
 
-        System.out.println("Then add two subjects");
+        LOGGER.info("Then add two subjects");
         student.addNewSubject("Maths");
         student.addNewSubject("Literature");
-        System.out.println("Subjects in course: " + student.subjectsInProgress);
-        System.out.println("Subject list: " + student.getSubjectsInProgressList());
+        LOGGER.info("Subjects in course: " + student.subjectsInProgress);
+        LOGGER.info("Subject list: " + student.getSubjectsInProgressList());
 
-        System.out.println("Then add two absences");
+        LOGGER.info("Then add two absences");
         student.addAbsence();
         student.addAbsence();
-        System.out.println("Absences: " + student.absences);
+        LOGGER.info("Absences: " + student.absences);
 
-        System.out.println("Then add nine more absences");
+        LOGGER.info("Then add nine more absences");
         for(int i = 0; i<9;i++) {
             student.addAbsence();
         }
-        System.out.println("Absences: " + student.absences);
-        System.out.println("He can continue coming to school? " + student.checkAbsencesState());
+        LOGGER.info("Absences: " + student.absences);
+        LOGGER.info("He can continue coming to school? " + student.checkAbsencesState());
 */
 /*
         Staff busDriver;
         try{
             busDriver = new Staff(1,"Pepe Conductor", "Bus Driver");
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            LOGGER.info(e.getMessage());
             busDriver = new Staff(1,"no designed name", "Bus Driver");
         }
         SchoolBus bus= new SchoolBus(busDriver);
@@ -83,27 +82,27 @@ public class Main {
 
         }
         catch (LicencePlateException e){
-           System.out.println(e.getMessage());
+           LOGGER.info(e.getMessage());
         }
 
         // Here I use the try-catch block inside a method
-        System.out.println("Try painting response: " + bus.tryPainting("white"));
+        LOGGER.info("Try painting response: " + bus.tryPainting("white"));
 
         // Here I execute the try-catch block on run
         try{
             bus.paint("white");
         }
         catch (PaintColorsException e){
-            System.out.println(e.getMessage());
+            LOGGER.info(e.getMessage());
         }
 
 
-        System.out.println(bus);
+        LOGGER.info(bus);
 
         try (Teacher teacher = new Teacher(121,"Edgardo Momo","Math",10);){
             teacher.assignToClass(0);
         }catch (NameLimitsException | AssignToClassException e){
-            System.out.println(e.getMessage());
+            LOGGER.info(e.getMessage());
         }
 
         Classroom classroom = new Classroom(8);
@@ -113,12 +112,36 @@ public class Main {
                 classroom.addStudent(new Student("Pedrito Suave",id++));
             }
             catch (FullClassroomException e){
-                System.out.println(e.getMessage());
+                LOGGER.info(e.getMessage());
             }
 
         }
 
 */
+
+        LOGGER.info("Test Teacher");
+
+        IdGeneration idGen = new IdGeneration();
+        int id = idGen.generateId();
+
+
+        Teacher firstTeacher = new Teacher(id, "Misses Rowlind", "Maths", 10);
+
+        firstTeacher.showTeacherData();
+
+        try{
+            firstTeacher.assignToClass(8);
+            firstTeacher.showTeacherData();
+        }
+        catch (BadAssignToClassException e) {
+            LOGGER.debug(e.getMessage());
+        }
+
+
+
+
+
+
 
     }
 

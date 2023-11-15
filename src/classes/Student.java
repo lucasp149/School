@@ -1,13 +1,22 @@
 package classes;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.Objects;
 
 public class Student {
 
+    // Logger
+    private static final Logger LOGGER = LogManager.getLogger(Student.class);
+
     public int studentId;
     public String fullName;
     public int absences;
+    private LinkedList<Date> absencesList = new LinkedList<>();
     public int subjectsInProgress;
     // we agree that students can take up to four subjects at a time
     private final ArrayList<String> subjectsInProgressList;
@@ -15,9 +24,9 @@ public class Student {
 
     // constructor
 
-    public Student (String _fullName, int _studentId) {
-        studentId = _studentId;
-        fullName = _fullName;
+    public Student (String fullName, int studentId) {
+        this.studentId = studentId;
+        this.fullName = fullName;
         absences = 0;
         subjectsInProgress = 0;
         isHonor = false;
@@ -28,14 +37,16 @@ public class Student {
     // methods
     public void addAbsence(){
         this.absences += 1;
+        // add the date to the array
+        absencesList.add(new Date());
     }
-    public void addNewSubject(String _newSubject) {
+    public void addNewSubject(String newSubject) {
         if(subjectsInProgress < 4) {
-            subjectsInProgressList.add(_newSubject);
+            subjectsInProgressList.add(newSubject);
             subjectsInProgress++;
         }
        else {
-           System.out.println("You cant add more than four subjects");
+           LOGGER.debug("You cant add more than four subjects");
         }
 
     }
@@ -46,6 +57,8 @@ public class Student {
         return absences <= 10;
     }
 
+
+
     // getters
     public boolean getIsHonor() {
         return isHonor;
@@ -55,9 +68,17 @@ public class Student {
         return subjectsInProgressList;
     }
 
+    public LinkedList<Date> getAbsencesList() {
+        return absencesList;
+    }
+
     // setters
-    public void setIsHonor(boolean _isHonor) {
-        this.isHonor = _isHonor;
+    public void setIsHonor(boolean isHonor) {
+        this.isHonor = isHonor;
+    }
+
+    public void setAbsencesList(LinkedList<Date> absencesList) {
+        this.absencesList = absencesList;
     }
 
     // override comparison methods

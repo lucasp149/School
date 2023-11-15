@@ -4,8 +4,8 @@ public class StudentDesk extends Furniture {
 
     // constructor
 
-    public StudentDesk (int _assignedToClassroom, String _color) {
-        super(_assignedToClassroom, _color, true, false);
+    public StudentDesk (int assignedToClassroom, String color) {
+        super(assignedToClassroom, color, true, false);
     }
 
     // if school buy a desk with no destination the classRoom will be "0" referring the deposit.

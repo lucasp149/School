@@ -5,12 +5,12 @@ public class TeacherDesk extends Furniture {
 
     // constructor
 
-    public TeacherDesk(int _assignedToClassroom, String _color) {
-        super(_assignedToClassroom, _color, true, false);
+    public TeacherDesk(int assignedToClassroom, String color) {
+        super(assignedToClassroom, color, true, false);
     }
 
-    public TeacherDesk(int _assignedToClassroom) {
-        super(_assignedToClassroom, "brown", true, false);
+    public TeacherDesk(int assignedToClassroom) {
+        super(assignedToClassroom, "brown", true, false);
     }
 
     public TeacherDesk() {

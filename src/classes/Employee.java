@@ -5,32 +5,38 @@ import java.util.Objects;
 
 abstract public class Employee {
 
-    public int employeeId;
+    IdGeneration idGen = new IdGeneration();
+    public int employeeId = idGen.generateId();
     public String fullName;
     protected int monthlyHours;
     protected int salaryPerHour;
     protected int salary;
 
+
+
     // constructor
-    public Employee (int _employeeId, String _fullName) throws NameLimitsException {
-        this.employeeId = _employeeId;
-        setFullName(_fullName);
+    public Employee (int employeeId, String fullName) throws NameLimitsException {
+        this.employeeId = employeeId;
+        setFullName(fullName);
         this.monthlyHours = 0;
         this.salaryPerHour = 0;
     }
 
-    public Employee (int _employeeId, String _fullName, int _monthlyHours, int _salaryPerHour) throws NameLimitsException {
-        this.employeeId = _employeeId;
-        setFullName(_fullName);
-        this.monthlyHours = _monthlyHours;
-        this.salaryPerHour = _salaryPerHour;
+    public Employee (int employeeId, String fullName, int monthlyHours, int salaryPerHour) throws NameLimitsException {
+        this.employeeId = employeeId;
+        setFullName(fullName);
+        this.monthlyHours = monthlyHours;
+        this.salaryPerHour = salaryPerHour;
+    }
+
+    public Employee() {
     }
 
     // methods
     abstract int calculateSalary ();
 
-    public void addHours (int _hoursAdded) {
-        this.monthlyHours += _hoursAdded;
+    public void addHours (int hoursAdded) {
+        this.monthlyHours += hoursAdded;
     }
 
     // getters
@@ -46,22 +52,22 @@ abstract public class Employee {
 
     // setters
 
-    public void setMonthlyHours(int _monthlyHours) {
-        this.monthlyHours = _monthlyHours;
+    public void setMonthlyHours(int monthlyHours) {
+        this.monthlyHours = monthlyHours;
     }
 
-    public void setSalaryPerHour(int _salaryPerHour) {
-        this.salaryPerHour = _salaryPerHour;
+    public void setSalaryPerHour(int salaryPerHour) {
+        this.salaryPerHour = salaryPerHour;
     }
 
-    public void setSalary(int _salary) {
-        this.salary = _salary;
+    public void setSalary(int salary) {
+        this.salary = salary;
     }
 
     // used for exception
-    public void setFullName(String _fullName) throws NameLimitsException {
-        if(_fullName.length() < 20){
-            this.fullName = _fullName;
+    public void setFullName(String fullName) throws NameLimitsException {
+        if(fullName.length() < 20){
+            this.fullName = fullName;
         }
         else {
             throw new NameLimitsException("The full name length has to be less than 20");
@@ -89,4 +95,6 @@ abstract public class Employee {
     public int hashCode() {
         return Objects.hash(this.fullName,this.employeeId);
     }
+
+
 }

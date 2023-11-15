@@ -7,7 +7,7 @@ public interface IDepositWork {
     String[] availableColors = {"brown","red","black","white"};
 
     // This method paint the object
-    void paint(String _color) throws PaintColorsException;
+    void paint(String color) throws BadPaintColorsException;
 
     // This method checks if object can be reassigned
     boolean checkPrepared();

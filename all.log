@@ -1,1 +1,17 @@
-2023-11-09 20:51:09.513 [main] INFO  Main - Hello word
+2023-11-15 12:05:36.200 [main] INFO  classes.customlLinkedList.CustomLinkedList - Node --->  Employee ID: 188
+Full Name: Fermin Culeao
+2023-11-15 12:05:36.205 [main] INFO  classes.customlLinkedList.CustomLinkedList - Node --->  Employee ID: 188
+Full Name: Dani Dano
+2023-11-15 12:05:36.205 [main] INFO  classes.customlLinkedList.CustomLinkedList - Node --->  Employee ID: 188
+Full Name: Federico Shoemberg
+2023-11-15 12:05:36.206 [main] INFO  classes.customlLinkedList.CustomLinkedList - Node --->  Employee ID: 188
+Full Name: Dario Insua
+2023-11-15 12:05:36.206 [main] INFO  classes.customlLinkedList.ExecuteCustomLinkedList - After sorting
+2023-11-15 12:05:36.206 [main] INFO  classes.customlLinkedList.CustomLinkedList - Node --->  Employee ID: 188
+Full Name: Dani Dano
+2023-11-15 12:05:36.206 [main] INFO  classes.customlLinkedList.CustomLinkedList - Node --->  Employee ID: 188
+Full Name: Dario Insua
+2023-11-15 12:05:36.206 [main] INFO  classes.customlLinkedList.CustomLinkedList - Node --->  Employee ID: 188
+Full Name: Federico Shoemberg
+2023-11-15 12:05:36.207 [main] INFO  classes.customlLinkedList.CustomLinkedList - Node --->  Employee ID: 188
+Full Name: Fermin Culeao

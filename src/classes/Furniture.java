@@ -8,32 +8,32 @@ package classes;
         public boolean needChange;
         protected int assignedToClassroom;
 
-        public Furniture (int _assignedToClassroom, String _color, boolean _isNew, boolean _needChange) {
-            color = _color;
-            assignedToClassroom = _assignedToClassroom;
-            isNew = _isNew;
-            needChange = _needChange;
+        public Furniture (int assignedToClassroom, String color, boolean isNew, boolean needChange) {
+            this.color = color;
+            this.assignedToClassroom = assignedToClassroom;
+            this.isNew = isNew;
+            this.needChange = needChange;
         }
 
         // method
-        public void changeAssignedToClassroom(int _newClassroom) {
-            assignedToClassroom = _newClassroom;
+        public void changeAssignedToClassroom(int newClassroom) {
+            assignedToClassroom = newClassroom;
         }
 
         @Override
-        public void paint (String _color) throws PaintColorsException {
+        public void paint (String color) throws BadPaintColorsException {
             boolean okColor = false;
             for(String s : availableColors){
-                if (_color.equals(s)) {
+                if (color.equals(s)) {
                     okColor = true;
                     break;
                 }
             }
             if(okColor){
-                this.color = _color;
+                this.color = color;
             }
             else {
-                throw new PaintColorsException("The color you choose is not in the available colors list");
+                throw new BadPaintColorsException("The color you choose is not in the available colors list");
             }
         }
 
