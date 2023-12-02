@@ -1,13 +1,10 @@
 package classes.customlLinkedList;
 
-import classes.Employee;
 import classes.NameLimitsException;
 import classes.Teacher;
+import classes.enums.Subject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.Collection;
-import java.util.Collections;
 
 public class ExecuteCustomLinkedList {
 
@@ -20,10 +17,10 @@ public class ExecuteCustomLinkedList {
     public static void main(String[] args) throws NameLimitsException {
 
         CustomLinkedList<Teacher> newCustom = new CustomLinkedList<>();
-        newCustom.addElement(new Teacher(188,"Fermin Culeao","Maths",8));
-        newCustom.addElement(new Teacher(188,"Dani Dano","Literature",9));
-        newCustom.addElement(new Teacher(188,"Federico Shoemberg","Physics",2));
-        newCustom.addElement(new Teacher(188,"Dario Insua","Sports",10));
+        newCustom.addElement(new Teacher("Fermin Culeao", Subject.MATH,8));
+        newCustom.addElement(new Teacher("Dani Dano",Subject.LITERATURE,9));
+        newCustom.addElement(new Teacher("Federico Shoemberg",Subject.GEOGRAPHY,2));
+        newCustom.addElement(new Teacher("Dario Insua",Subject.PHYSICAL_EDUCATION,10));
 
 
         newCustom.showAll();

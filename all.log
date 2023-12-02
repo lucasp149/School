@@ -1,0 +1,58 @@
+2023-12-02 17:46:27.104 [main] INFO  classes.Classroom - The CLASSROOM class has been executed for the first time and its value has been set to 0
+2023-12-02 17:46:27.117 [main] INFO  Main - The school name is Great School
+2023-12-02 17:46:27.117 [main] INFO  Main - The name is Pedro
+2023-12-02 17:46:27.118 [main] INFO  Main - true
+2023-12-02 17:46:27.118 [main] INFO  Main - The school name is Great School
+2023-12-02 17:46:27.118 [main] INFO  Main - The name is Juanita
+2023-12-02 17:46:27.118 [main] INFO  Main - true
+2023-12-02 17:46:27.118 [main] INFO  Main - The school name is Great School
+2023-12-02 17:46:27.118 [main] INFO  Main - The name is Juanita
+2023-12-02 17:46:27.119 [main] INFO  Main - true
+2023-12-02 17:46:27.119 [main] INFO  Main - The school name is Great School
+2023-12-02 17:46:27.119 [main] INFO  Main - The name is Juanita
+2023-12-02 17:46:27.119 [main] INFO  Main - true
+2023-12-02 17:46:27.119 [main] INFO  Main - The school name is Great School
+2023-12-02 17:46:27.119 [main] INFO  Main - The name is Juanita
+2023-12-02 17:46:27.119 [main] INFO  Main - true
+2023-12-02 17:46:27.120 [main] INFO  Main - The school name is Great School
+2023-12-02 17:46:27.120 [main] INFO  Main - The name is Juanita
+2023-12-02 17:46:27.120 [main] INFO  Main - true
+2023-12-02 17:46:27.120 [main] INFO  Main - The school name is Great School
+2023-12-02 17:46:27.120 [main] INFO  Main - The name is Juanita
+2023-12-02 17:46:27.120 [main] INFO  Main - true
+2023-12-02 17:46:27.120 [main] INFO  Main - The school name is Great School
+2023-12-02 17:46:27.120 [main] INFO  Main - The name is Juanita
+2023-12-02 17:46:27.120 [main] INFO  Main - true
+2023-12-02 17:46:27.121 [main] INFO  Main - The school name is Great School
+2023-12-02 17:46:27.121 [main] INFO  Main - The name is Juanita
+2023-12-02 17:46:27.121 [main] INFO  Main - true
+2023-12-02 17:46:27.121 [main] INFO  Main - The school name is Great School
+2023-12-02 17:46:27.121 [main] INFO  Main - The name is Juanita
+2023-12-02 17:46:27.121 [main] INFO  Main - true
+2023-12-02 17:46:27.121 [main] INFO  Main - The school name is Great School
+2023-12-02 17:46:27.122 [main] INFO  Main - The name is Juanita
+2023-12-02 17:46:27.122 [main] INFO  Main - true
+2023-12-02 17:46:27.122 [main] INFO  Main - The school name is Great School
+2023-12-02 17:46:27.122 [main] INFO  Main - The name is Justiniana
+2023-12-02 17:46:27.122 [main] INFO  Main - false
+2023-12-02 17:46:27.126 [main] INFO  Main - The best paid employee is: Employee ID: 590
+Full Name: Pedro Salietto
+2023-12-02 17:46:27.127 [main] INFO  Main - The calculated salary of Pedro Salietto for 14 months is: 70560
+2023-12-02 17:46:27.127 [main] INFO  Main - We are comparing two Teachers with the same Name: 
+--- Are this two teachers the same?  false
+2023-12-02 17:46:27.127 [main] INFO  Main - We are comparing two School Buses with equal License Plate: 
+--- Are this two buses the same?  true
+2023-12-02 17:46:27.127 [main] INFO  Main - 100 is the current class Id!
+2023-12-02 17:46:27.128 [main] INFO  Main - 101 is the current class Id!
+2023-12-02 17:46:27.128 [main] INFO  Main - 102 is the current class Id!
+2023-12-02 17:46:27.128 [main] INFO  Main - 103 is the current class Id!
+2023-12-02 17:46:27.128 [main] INFO  Main - 104 is the current class Id!
+2023-12-02 17:46:27.128 [main] INFO  Main - 105 is the current class Id!
+2023-12-02 17:46:27.128 [main] INFO  Main - 106 is the current class Id!
+2023-12-02 17:46:27.128 [main] INFO  Main - 107 is the current class Id!
+2023-12-02 17:46:27.128 [main] INFO  Main - 108 is the current class Id!
+2023-12-02 17:46:27.129 [main] INFO  Main - 109 is the current class Id!
+2023-12-02 17:46:27.129 [main] INFO  classes.SchoolBus - This gonna check if the school name and color are correct
+2023-12-02 17:46:27.129 [main] INFO  Main - The color is not correct
+2023-12-02 17:46:27.129 [main] INFO  classes.SchoolBus - This gonna check if the school name and color are correct
+2023-12-02 17:46:27.129 [main] INFO  Main - This color is correct

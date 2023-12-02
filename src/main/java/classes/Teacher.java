@@ -1,5 +1,6 @@
 package classes;
 
+import classes.enums.Subject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -9,19 +10,19 @@ public class Teacher extends Employee implements IEmployeeActions, Comparable<Te
 
     // Logger
     private static final Logger LOGGER = LogManager.getLogger(Teacher.class);
-    public String subject;
+    public Subject subject;
     private int assignedToClass;
     private ArrayList<Integer> previousClasses = new ArrayList<>();
 
     // constructor
-    public Teacher (int id, String fullName, String subject, int assignedToClass) throws NameLimitsException {
-        super(id, fullName);
+    public Teacher (String fullName, Subject subject, int assignedToClass) throws NameLimitsException {
+        super(fullName);
         this.subject = subject;
         this.assignedToClass = assignedToClass;
     }
 
-    public Teacher (int id, String fullName, int monthlyHours, int salaryPerHour, String subject, int assignedToClass) throws NameLimitsException {
-        super(id, fullName, monthlyHours, salaryPerHour);
+    public Teacher (String fullName, int monthlyHours, int salaryPerHour, Subject subject, int assignedToClass) throws NameLimitsException {
+        super(fullName, monthlyHours, salaryPerHour);
         this.subject = subject;
         this.assignedToClass = assignedToClass;
     }

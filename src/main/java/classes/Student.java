@@ -1,5 +1,6 @@
 package classes;
 
+import classes.enums.Subject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,7 +20,7 @@ public class Student {
     private LinkedList<Date> absencesList = new LinkedList<>();
     public int subjectsInProgress;
     // we agree that students can take up to four subjects at a time
-    private final ArrayList<String> subjectsInProgressList;
+    private final ArrayList<Subject> subjectsInProgressList;
     private boolean isHonor;
 
     // constructor
@@ -31,7 +32,7 @@ public class Student {
         subjectsInProgress = 0;
         isHonor = false;
         // do I need to initialize the subjectsInProgressList attribute?
-        subjectsInProgressList = new ArrayList<String>();
+        subjectsInProgressList = new ArrayList<Subject>();
     }
 
     // methods
@@ -40,7 +41,7 @@ public class Student {
         // add the date to the array
         absencesList.add(new Date());
     }
-    public void addNewSubject(String newSubject) {
+    public void addNewSubject(Subject newSubject) {
         if(subjectsInProgress < 4) {
             subjectsInProgressList.add(newSubject);
             subjectsInProgress++;
@@ -64,7 +65,7 @@ public class Student {
         return isHonor;
     }
 
-    public ArrayList<String> getSubjectsInProgressList() {
+    public ArrayList<Subject> getSubjectsInProgressList() {
         return subjectsInProgressList;
     }
 
