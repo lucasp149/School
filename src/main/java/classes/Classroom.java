@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.function.Supplier;
 
 public class Classroom implements IStudentsManage{
 
@@ -46,6 +47,13 @@ public class Classroom implements IStudentsManage{
         totalNumberOfClassrooms++;
     }
 
+    public String returnIdAsString (Supplier<String> s) {
+        Integer classIdInteger = (Integer) this.classId;
+        String classString = classIdInteger.toString();
+
+        return classString + s.get();
+    }
+
     // getters
 
     public int getMaxStudents() {
@@ -61,6 +69,11 @@ public class Classroom implements IStudentsManage{
 
     public void setAssignedStudents(int assignedStudents) {
         this.assignedStudents = assignedStudents;
+    }
+
+    @Override
+    public String toString(){
+        return "Classroom ID: " + classId;
     }
 }
 

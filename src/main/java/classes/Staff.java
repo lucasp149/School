@@ -1,5 +1,6 @@
 package classes;
 
+import classes.enums.Occupation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -8,32 +9,32 @@ public class Staff extends Employee implements IEmployeeActions, Comparable<Staf
 
     // Logger
     private static final Logger LOGGER = LogManager.getLogger(Staff.class);
-    public String occupation;
+    public Occupation occupation;
     private int driversPlus;
     // constructor
 
-    public Staff (int id, String fullName, String occupation) throws NameLimitsException {
-        super(id, fullName);
+    public Staff (String fullName, Occupation occupation) throws NameLimitsException {
+        super(fullName);
         this.occupation = occupation;
 
     }
 
-    public Staff (int id, String fullName, int monthlyHours, int salaryPerHour, String occupation) throws NameLimitsException {
-        super(id, fullName, monthlyHours, salaryPerHour);
+    public Staff (String fullName, int monthlyHours, int salaryPerHour, Occupation occupation) throws NameLimitsException {
+        super(fullName, monthlyHours, salaryPerHour);
         this.occupation = occupation;
         driversPlus = calculatePlus(occupation);
     }
 
     // method
 
-    private int calculatePlus(String occupation){
-        return (occupation.equals("Driver") ? 1000 : 0);
+    private int calculatePlus(Occupation occupation){
+        return (occupation == Occupation.DRIVER ? 1000 : 0);
     }
     @Override
     public int calculateSalary () {
         int salary = super.getSalaryPerHour() * super.getMonthlyHours();
 
-        if(this.occupation.equals("driver")){
+        if(this.occupation.getOccupationName().equals("driver")){
            salary+= driversPlus;
         }
 

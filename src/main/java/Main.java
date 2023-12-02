@@ -1,8 +1,15 @@
 import classes.*;
+import classes.enums.Occupation;
+import classes.enums.Subject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 
 public class Main {
@@ -118,7 +125,7 @@ public class Main {
         }
 
 */
-
+/*
         LOGGER.info("Test Teacher");
 
         IdGeneration idGen = new IdGeneration();
@@ -137,13 +144,116 @@ public class Main {
             LOGGER.debug(e.getMessage());
         }
 
+   */
+        // create 10 employees and 10 classrooms
+
+        ArrayList<Teacher> teachers = new ArrayList<>();
+        ArrayList<Classroom> classes = new ArrayList<>();
+
+        teachers.add(new Teacher("Pedro Salietto", Subject.GEOGRAPHY,2020));
+
+        for(int i=0;i<10;i++){
+            teachers.add(new Teacher("Juanita Lopez",Subject.MATH,i+1));
+            classes.add(new Classroom(i+100));
+        }
+
+        teachers.add(new Teacher("Justiniana Molino",Subject.LITERATURE,91));
+
+        // create a bus driver
+        Staff busDriver = new Staff("Pedro Gomez", Occupation.DRIVER);
+        Staff busDriver2 = new Staff("Celeste Borggia", Occupation.DRIVER);
+        // create a school bus
+        SchoolBus bus = new SchoolBus(busDriver);
+        SchoolBus secondaryBus = new SchoolBus(busDriver2);
+
+        try {
+            bus.setLicensePlate(1234567);
+        } catch (LicencePlateException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            secondaryBus.setLicensePlate(1234567);
+        } catch (LicencePlateException e) {
+            throw new RuntimeException(e);
+        }
 
 
+        // Java provided Functional Interfaces
+
+      Runnable r = () -> LOGGER.info("The school name is Great School");
+
+      Consumer<String> c = (name) -> {
+            String[] separatedName = new String[2];
+            separatedName = name.split(" ");
+            LOGGER.info("The name is " + separatedName[0]);
+        };
+
+      Predicate<Integer> predicate = (employeeId) -> {
+          return employeeId > 100;
+      };
+
+      Function<String,String> function = (color) -> {
+
+            if(color.equals("red")){
+                return "This color is correct";
+            }
+            else{
+                return "The color is not correct";
+            }
+        };
+
+      Supplier<String> sup = () -> {
+          return " is the current class Id!";
+        };
 
 
+      // Custom generic functional interfaces
+
+      ISelectTheBestPaid<Teacher> bestPaidEmployee = (listOfEmployees) -> {
+          return listOfEmployees.stream()
+                  .max(Comparator.comparingInt(Employee::getSalary))
+                  .get();
+      };
+
+      ICalculateSalaryInTime<Integer> calculateSalaryInTime = (salary, months) -> {
+          return salary*months;
+      };
+
+      ICompare<Teacher> compareTeacher = (teacher1, teacher2) -> {
+          return teacher1.employeeId == teacher2.employeeId;
+      };
+
+      ICompare<SchoolBus> compareBuses = (bus1, bus2) -> bus1.getLicensePlate() == bus2.getLicensePlate();
+
+        for(Teacher teacher : teachers) {
+            teacher.printSchoolName(r);
+            teacher.doSomethingWithName(c);
+            // add salary to all teachers
+            teacher.setSalary(1000+teacher.getAssignedToClass()*2);
+            LOGGER.info(teacher.checkCorrectId(predicate));
+        }
+
+        LOGGER.info("The best paid employee is: " + bestPaidEmployee.getBestPaid(teachers));
+        LOGGER.info("The calculated salary of " + teachers.get(0).fullName + " for 14 months is: " + calculateSalaryInTime.getSalaryInTime(teachers.get(0).getSalary(),14));
+        LOGGER.info("We are comparing two Teachers with the same Name: \n--- Are this two teachers the same?  "+ compareTeacher.compare(teachers.get(2),teachers.get(3)));
+        LOGGER.info("We are comparing two School Buses with equal License Plate: \n--- Are this two buses the same?  "+ compareBuses.compare(bus,secondaryBus));
+
+        for(Classroom classroom : classes) {
+            LOGGER.info(classroom.returnIdAsString(sup));
+        }
+
+        LOGGER.info(bus.checkColorDependingOnSchoolNeeds(function));
+
+        try{
+            bus.paint("red");
+        }
+        catch (BadPaintColorsException e){
+            LOGGER.debug(e.getMessage());
+        }
+
+        LOGGER.info(bus.checkColorDependingOnSchoolNeeds(function));
 
 
     }
-
 
 }

@@ -5,13 +5,14 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.function.Function;
 
 public class SchoolBus implements IStudentsManage, IDepositWork, IQualityControl{
     // Logger
     private static final Logger LOGGER = LogManager.getLogger(SchoolBus.class);
     private int licensePlate;
 
-    // number of students max cant be changed
+    // number of  max students cant be changed
     private final static int maxStudents = 20;
     public int occupants = 0;
     private Staff driver;
@@ -59,14 +60,11 @@ public class SchoolBus implements IStudentsManage, IDepositWork, IQualityControl
         }
         return response;
     }
-    public void setLicensePlate(int licencePlate) throws LicencePlateException {
-        if(String.valueOf(licencePlate).length() < 8 && !String.valueOf(licencePlate).isEmpty()){
-            this.licensePlate = licencePlate;
-        }
-        else {
-            throw new LicencePlateException("The licence number does not fulfill the requirements");
-        }
 
+
+    public String checkColorDependingOnSchoolNeeds (Function<String,String> f){
+        LOGGER.info("This gonna check if the school name and color are correct");
+        return f.apply(this.color);
     }
 
     @Override
@@ -76,7 +74,7 @@ public class SchoolBus implements IStudentsManage, IDepositWork, IQualityControl
 
     @Override
     public void paint(String color) throws BadPaintColorsException {
-        if(color.equals("yellow")){
+        if(color.equals("yellow") || color.equals("red")){
             this.color = color;
         }
         else{
@@ -94,6 +92,19 @@ public class SchoolBus implements IStudentsManage, IDepositWork, IQualityControl
         this.driver = driverId;
     }
 
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public void setLicensePlate(int licencePlate) throws LicencePlateException {
+        if(String.valueOf(licencePlate).length() < 8 && !String.valueOf(licencePlate).isEmpty()){
+            this.licensePlate = licencePlate;
+        }
+        else {
+            throw new LicencePlateException("The licence number does not fulfill the requirements");
+        }
+
+    }
 
     // getter
     public Staff getDriverId () {
@@ -102,6 +113,14 @@ public class SchoolBus implements IStudentsManage, IDepositWork, IQualityControl
 
     public ArrayList<Student> getStudents() {
         return students;
+    }
+
+    public int getLicensePlate() {
+        return licensePlate;
+    }
+
+    public String getColor() {
+        return color;
     }
 
     // Utils

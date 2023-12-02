@@ -1,7 +1,8 @@
 package classes;
 
-import java.math.BigDecimal;
 import java.util.Objects;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 abstract public class Employee {
 
@@ -12,24 +13,29 @@ abstract public class Employee {
     protected int salaryPerHour;
     protected int salary;
 
+    public static int numberOfEmployees;
+
 
 
     // constructor
-    public Employee (int employeeId, String fullName) throws NameLimitsException {
-        this.employeeId = employeeId;
+    public Employee (String fullName) throws NameLimitsException {
+
         setFullName(fullName);
         this.monthlyHours = 0;
         this.salaryPerHour = 0;
+        numberOfEmployees++;
     }
 
-    public Employee (int employeeId, String fullName, int monthlyHours, int salaryPerHour) throws NameLimitsException {
-        this.employeeId = employeeId;
+    public Employee (String fullName, int monthlyHours, int salaryPerHour) throws NameLimitsException {
+
         setFullName(fullName);
         this.monthlyHours = monthlyHours;
         this.salaryPerHour = salaryPerHour;
+        numberOfEmployees++;
     }
 
     public Employee() {
+        numberOfEmployees++;
     }
 
     // methods
@@ -37,6 +43,18 @@ abstract public class Employee {
 
     public void addHours (int hoursAdded) {
         this.monthlyHours += hoursAdded;
+    }
+
+    public void printSchoolName (Runnable r) {
+        r.run();
+    }
+
+    public void doSomethingWithName (Consumer<String> c) {
+        c.accept(this.fullName);
+    }
+
+    public boolean checkCorrectId (Predicate<Integer> i) {
+        return i.test(this.employeeId);
     }
 
     // getters
