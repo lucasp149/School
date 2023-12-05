@@ -4,12 +4,13 @@ import classes.enums.Subject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+
 
 
 public class Main {
@@ -46,35 +47,86 @@ public class Main {
         LOGGER.info("Is assigned to classroom: " + board.assignedToClassroom);
 
  */
-/* Test Student
+
+ //Test Student
+
+        LinkedList<Student> studentList = new LinkedList<>();
         Student student = new Student("Lucas Perez", 2002);
-        LOGGER.info("The new student info: ");
-        LOGGER.info("His name: " + student.fullName);
-        LOGGER.info("Absences: " + student.absences);
-        LOGGER.info("Id: " + student.studentId);
-        LOGGER.info("Subjects in course: " + student.subjectsInProgress);
-        LOGGER.info("Subject list: " + student.getSubjectsInProgressList());
-        LOGGER.info("Is he an Honor student?  " + student.getIsHonor());
-        LOGGER.info("He can continue coming to school? " + student.checkAbsencesState());
+        student.addNewSubject(Subject.MATH);
+        student.addNewSubject(Subject.LITERATURE);
+        student.addNewSubject(Subject.PHYSICAL_EDUCATION);
+        student.addNewSubject(Subject.BIOLOGY);
+        student.addNewSubject(Subject.HISTORY);
 
-        LOGGER.info("Then add two subjects");
-        student.addNewSubject("Maths");
-        student.addNewSubject("Literature");
-        LOGGER.info("Subjects in course: " + student.subjectsInProgress);
-        LOGGER.info("Subject list: " + student.getSubjectsInProgressList());
 
-        LOGGER.info("Then add two absences");
-        student.addAbsence();
-        student.addAbsence();
-        LOGGER.info("Absences: " + student.absences);
-
-        LOGGER.info("Then add nine more absences");
-        for(int i = 0; i<9;i++) {
-            student.addAbsence();
+        studentList.add(student);
+        for(int i=0; i<10;i++){
+            studentList.add(new Student("student number "+i,2002+i));
         }
-        LOGGER.info("Absences: " + student.absences);
-        LOGGER.info("He can continue coming to school? " + student.checkAbsencesState());
-*/
+        studentList.get(3).addNewSubject(Subject.PHYSICAL_EDUCATION);
+        studentList.get(4).setIsHonor(true);
+
+        for(Student s : studentList) {
+            s.addNewSubject(Subject.HISTORY);
+            s.addNewSubject(Subject.MATH);
+        }
+
+
+        // Filter students that are taking MATH and PHYSICAL EDUCATION
+        List<Student> list = studentList.stream()
+                    .filter(s -> s.isTakingSubject(Subject.MATH))
+                    .filter(s -> s.isTakingSubject(Subject.PHYSICAL_EDUCATION))
+                    .toList();
+
+        LOGGER.info("Students that are taking MATH and PHYSICAL EDUCATION: " + list);
+
+
+
+       LOGGER.info("Subjects in course: " + student.subjectsInProgress);
+       LOGGER.info("Subject list: " + student.getSubjectsInProgressList());
+       LOGGER.info("Subjects codes: " + student.getSubjectsCodes());
+
+
+       LOGGER.info("\n\n------------- CREATE NEW CLASSROOM ---------------\n");
+
+        Classroom firstClassroom = new Classroom(1);
+        LOGGER.info("The current number of classrooms is: " + Classroom.totalNumberOfClassrooms);
+
+        for(Student s: studentList){
+            try{
+                firstClassroom.addStudent(s);
+            }
+            catch (FullClassroomException e){
+                LOGGER.debug("Full classroom");
+            }
+
+        }
+
+        LOGGER.info("The more taken subject (by code) is: " + firstClassroom.getMoreTakenSubject());
+
+
+       Optional<String> studentsNames = firstClassroom.getStudents().stream()
+               .map(s -> s.fullName)
+               .reduce((names,name) -> names + "," + name);
+
+        if(studentsNames.isPresent()){
+            String studentsNamesList = studentsNames.get();
+            LOGGER.info("This is the list of Students: " +  studentsNamesList);
+        }
+
+        Student honoredStudents =  firstClassroom.getStudents().stream()
+                .filter(Student::getIsHonor)
+                .findAny()
+                .orElse(null);
+
+        if(honoredStudents != null){
+            LOGGER.info("There is al least one honored Students in your class");
+        }
+        else{
+            LOGGER.info("There is no honored students in this classroom");
+        }
+
+
 /*
         Staff busDriver;
         try{
@@ -145,24 +197,25 @@ public class Main {
         }
 
    */
+
         // create 10 employees and 10 classrooms
 
         ArrayList<Teacher> teachers = new ArrayList<>();
         ArrayList<Classroom> classes = new ArrayList<>();
 
-        teachers.add(new Teacher("Pedro Salietto", Subject.GEOGRAPHY,2020));
+        teachers.add(new Teacher("Pedro Salient", Subject.GEOGRAPHY,2020));
 
         for(int i=0;i<10;i++){
             teachers.add(new Teacher("Juanita Lopez",Subject.MATH,i+1));
             classes.add(new Classroom(i+100));
         }
 
-        teachers.add(new Teacher("Justiniana Molino",Subject.LITERATURE,91));
+        teachers.add(new Teacher("Justinian Molina",Subject.LITERATURE,91));
 
-        // create a bus driver
+        // create two bus driver
         Staff busDriver = new Staff("Pedro Gomez", Occupation.DRIVER);
-        Staff busDriver2 = new Staff("Celeste Borggia", Occupation.DRIVER);
-        // create a school bus
+        Staff busDriver2 = new Staff("Celeste Borgia", Occupation.DRIVER);
+        // create two school bus
         SchoolBus bus = new SchoolBus(busDriver);
         SchoolBus secondaryBus = new SchoolBus(busDriver2);
 
@@ -180,7 +233,10 @@ public class Main {
 
         // Java provided Functional Interfaces
 
-      Runnable r = () -> LOGGER.info("The school name is Great School");
+      AtomicReference<String> schoolName = new AtomicReference<>();
+      Runnable changeSchoolName = () -> schoolName.set("Great School");
+
+      Runnable r = () -> LOGGER.info("The school name is " + schoolName);
 
       Consumer<String> c = (name) -> {
             String[] separatedName = new String[2];
@@ -225,6 +281,8 @@ public class Main {
 
       ICompare<SchoolBus> compareBuses = (bus1, bus2) -> bus1.getLicensePlate() == bus2.getLicensePlate();
 
+      Classroom.changeSchoolName(changeSchoolName);
+
         for(Teacher teacher : teachers) {
             teacher.printSchoolName(r);
             teacher.doSomethingWithName(c);
@@ -252,6 +310,8 @@ public class Main {
         }
 
         LOGGER.info(bus.checkColorDependingOnSchoolNeeds(function));
+
+
 
 
     }

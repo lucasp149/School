@@ -4,10 +4,7 @@ import classes.enums.Subject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.Objects;
+import java.util.*;
 
 public class Student {
 
@@ -49,7 +46,6 @@ public class Student {
        else {
            LOGGER.debug("You cant add more than four subjects");
         }
-
     }
     public void makeHonor() {
         this.isHonor = true;
@@ -58,7 +54,18 @@ public class Student {
         return absences <= 10;
     }
 
+    public boolean isTakingSubject (Subject subject) {
+       return this.getSubjectsInProgressList().stream()
+                .anyMatch((x) -> x == subject );
 
+    };
+
+    public ArrayList<Integer> getSubjectsCodes () {
+       List<Integer> list = subjectsInProgressList.stream()
+                .map(Subject::getSubjectCode)
+                .toList();
+        return new ArrayList<Integer>(list);
+    }
 
     // getters
     public boolean getIsHonor() {

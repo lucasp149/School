@@ -4,7 +4,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class Classroom implements IStudentsManage{
 
@@ -13,7 +17,7 @@ public class Classroom implements IStudentsManage{
     public int classId;
     protected final int MAX_STUDENTS = 20;
     protected int assignedStudents;
-    ArrayList<Student> students = new ArrayList<>();
+    private ArrayList<Student> students = new ArrayList<>();
 
     public static int totalNumberOfClassrooms;
 
@@ -54,6 +58,24 @@ public class Classroom implements IStudentsManage{
         return classString + s.get();
     }
 
+    public long getMoreTakenSubject () {
+
+        Map<Integer, Long> mapped = students.stream()
+                .map(Student::getSubjectsCodes)
+                .flatMap(Collection::stream)
+                .collect(Collectors.groupingByConcurrent(code -> code,Collectors.counting()));
+
+        return Collections.max(mapped.entrySet(), Map.Entry.comparingByValue()).getKey();
+
+    }
+
+    public static void getSchoolName (Runnable r){
+        r.run();
+    }
+
+    public static void changeSchoolName (Runnable r) {
+        r.run();
+    }
     // getters
 
     public int getMaxStudents() {
@@ -64,6 +86,9 @@ public class Classroom implements IStudentsManage{
         return assignedStudents;
     }
 
+    public ArrayList<Student> getStudents() {
+        return students;
+    }
 
     // setters
 

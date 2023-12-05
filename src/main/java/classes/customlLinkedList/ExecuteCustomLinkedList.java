@@ -17,15 +17,15 @@ public class ExecuteCustomLinkedList {
     public static void main(String[] args) throws NameLimitsException {
 
         CustomLinkedList<Teacher> newCustom = new CustomLinkedList<>();
-        newCustom.addElement(new Teacher("Fermin Culeao", Subject.MATH,8));
-        newCustom.addElement(new Teacher("Dani Dano",Subject.LITERATURE,9));
-        newCustom.addElement(new Teacher("Federico Shoemberg",Subject.GEOGRAPHY,2));
-        newCustom.addElement(new Teacher("Dario Insua",Subject.PHYSICAL_EDUCATION,10));
+        newCustom.addElement(new Teacher("Fermin Molecule", Subject.MATH,8));
+        newCustom.addElement(new Teacher("Dani Dan",Subject.LITERATURE,9));
+        newCustom.addElement(new Teacher("Federico Shoemaker",Subject.GEOGRAPHY,2));
+        newCustom.addElement(new Teacher("Dario Insula",Subject.PHYSICAL_EDUCATION,10));
 
 
         newCustom.showAll();
         newCustom.bubbleSort();
-        LOGGER2.info("After sorting");
+        LOGGER2.info("\n\nAfter sorting---------------------------\n");
         newCustom.showAll();
 
     }
